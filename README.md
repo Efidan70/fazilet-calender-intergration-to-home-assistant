@@ -4,6 +4,9 @@ Gebedstijden rechtstreeks van [namaz-vakitleri.fazilettakvimi.com](https://namaz
 
 Prayer times taken straight from the Fazilet Takvimi website, for any city it lists.
 
+[![Open je Home Assistant en voeg deze repository toe aan HACS.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=Efidan70&repository=fazilet-calender-intergration-to-home-assistant&category=integration)
+[![Start de configuratie van de integratie.](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=fazilet_takvimi)
+
 ## Installeren / Install
 
 1. HACS → ⋮ → Custom repositories → `https://github.com/Efidan70/fazilet-calender-intergration-to-home-assistant`, type *Integration* → Download. Of kopieer `custom_components/fazilet_takvimi` naar je `config/custom_components/`.
