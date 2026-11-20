@@ -18,7 +18,7 @@
       },
       "manual": {
         "title": "Page path",
-        "description": "Path on namaz-vakitleri.fazilettakvimi.com, for example hollanda/venlo",
+        "description": "Path on namaz-vakitleri.fazilettakvimi.com, for example almanya/koln",
         "data": { "path": "Path" }
       },
       "confirm": {

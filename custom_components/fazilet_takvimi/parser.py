@@ -209,7 +209,7 @@ class _LinkExtractor(HTMLParser):
 
 
 def extract_links(html: str, base_host: str) -> list[tuple[str, str]]:
-    """Return unique internal (path, label) pairs, e.g. ('hollanda/venlo', 'Venlo')."""
+    """Return unique internal (path, label) pairs, e.g. ('country/city', 'City')."""
     parser = _LinkExtractor()
     parser.feed(html)
     out: dict[str, str] = {}

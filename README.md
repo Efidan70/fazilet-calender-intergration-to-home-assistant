@@ -1,48 +1,46 @@
-# Fazilet Takvimi voor Home Assistant
+# Fazilet Takvimi for Home Assistant
 
-Gebedstijden rechtstreeks van [namaz-vakitleri.fazilettakvimi.com](https://namaz-vakitleri.fazilettakvimi.com), dus dezelfde tijden als in de Fazilet Takvimi. Werkt voor elke stad die Fazilet toont (Nederland, Duitsland, Turkije, ...).
+[![Add this repository to HACS.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=Efidan70&repository=fazilet-calender-intergration-to-home-assistant&category=integration)
+[![Start setting up the integration.](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=fazilet_takvimi)
 
-Prayer times taken straight from the Fazilet Takvimi website, for any city it lists.
+Prayer times taken straight from [namaz-vakitleri.fazilettakvimi.com](https://namaz-vakitleri.fazilettakvimi.com), so you get the same times as in the Fazilet Takvimi. Works for every city the site lists, in any country.
 
-[![Open je Home Assistant en voeg deze repository toe aan HACS.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=Efidan70&repository=fazilet-calender-intergration-to-home-assistant&category=integration)
-[![Start de configuratie van de integratie.](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=fazilet_takvimi)
+## Installation
 
-## Installeren / Install
+1. Click the first button above, or in HACS go to ⋮ → Custom repositories, add `https://github.com/Efidan70/fazilet-calender-intergration-to-home-assistant` as type *Integration*, then Download. You can also copy `custom_components/fazilet_takvimi` into your `config/custom_components/` folder.
+2. Restart Home Assistant.
+3. Go to Settings → Devices & services → Add integration → **Fazilet Takvimi** (or use the second button).
+4. Pick your country and city from the list, or enter the page path yourself. The path is the part of the Fazilet URL after the domain, for example `almanya/koln` (country/city).
+5. Choose the time zone of the city (defaults to your Home Assistant time zone).
 
-1. HACS → ⋮ → Custom repositories → `https://github.com/Efidan70/fazilet-calender-intergration-to-home-assistant`, type *Integration* → Download. Of kopieer `custom_components/fazilet_takvimi` naar je `config/custom_components/`.
-2. Herstart Home Assistant.
-3. Instellingen → Apparaten & diensten → Integratie toevoegen → **Fazilet Takvimi**.
-4. Kies land en stad (bijv. Hollanda → Venlo), of voer het pad in: `hollanda/venlo`.
-5. Kies de tijdzone van de stad (standaard die van je Home Assistant).
+## What you get
 
-## Wat je krijgt
+- Timestamp sensors: İmsak, Sabah, Güneş, Öğle, İkindi, Akşam, Yatsı
+- `Next prayer` (name) and `Next prayer time` sensors
+- A calendar with today's and tomorrow's prayer times
 
-- Sensoren (tijdstempel): İmsak, Sabah, Güneş, Öğle, İkindi, Akşam, Yatsı
-- `Volgende vakit` (naam) en `Volgende vakit tijd`
-- Agenda `Vakitler` met alle tijden van vandaag en morgen
-
-Voorbeeld-automatisering (Akşam). De entiteitsnaam hangt af van de naam die je bij het instellen kiest, controleer hem onder Instellingen → Entiteiten:
+Example automation (Akşam). The entity ID depends on the name you chose during setup, so check it under Settings → Entities:
 
 ```yaml
 trigger:
   - platform: time
-    at: sensor.venlo_hollanda_aksam
+    at: sensor.<your_city>_aksam
 action:
   - service: notify.notify
-    data: { message: "Akşam vakti girdi" }
+    data: { message: "Akşam time has started" }
 ```
 
-## Waarom de tijden kloppen
+## Why the times are correct
 
-- Er wordt niets berekend: de tijden komen letterlijk van de Fazilet-pagina.
-- Elke dag wordt opgeslagen onder de datum die de pagina zelf noemt (gisteren/vandaag/morgen), dus een verouderde pagina wordt nooit als vandaag gebruikt.
-- Tijden die niet volledig zijn of in verkeerde volgorde staan worden geweigerd; dan blijven de laatst bekende tijden staan en staat er een waarschuwing in het log.
-- Verversing elke 6 uur, elke 30 minuten zolang de tijden van vandaag ontbreken.
+- Nothing is calculated. The times are taken exactly as published on the Fazilet page.
+- Each day is stored under the date the page itself reports (yesterday/today/tomorrow), so an outdated page is never used as today.
+- Incomplete times or times in the wrong order are rejected. The last known good times stay in place and a warning is written to the log.
+- Refresh every 6 hours, and every 30 minutes while today's times are missing.
 
-## Beperkingen
+## Limitations
 
-- Fazilet heeft geen officiële API; als de website verandert, kan de parser aangepast moeten worden.
-- Dinî günler/kandil-dagen zitten er nog niet in.
+- Fazilet has no official API. If the website changes, the parser may need an update.
+- Religious days (kandil etc.) are not included yet.
 
 ## Tests
 

@@ -11,11 +11,11 @@ fz = importlib.util.module_from_spec(_spec)
 sys.modules["fz_parser"] = fz
 _spec.loader.exec_module(fz)
 
-# Layout mirrors the Venlo page of 20 Nov 2026 (label + time as separate elements).
-VENLO_HTML = """
-<html><head><title>Venlo Namaz Vakitleri – Hollanda | Fazilet Takvimi</title>
+# Layout mirrors a sample city page of 20 Nov 2026 (label + time as separate elements).
+SAMPLE_HTML = """
+<html><head><title>Sample City Namaz Vakitleri – Country | Fazilet Takvimi</title>
 <script>var x = {"imsak":"99:99"};</script></head><body>
-<h1>Venlo Namaz Vakitleri</h1><p>20 Kasım 2026 Cuma</p><p>7 Cemaziyelahir 1448</p>
+<h1>Sample City Namaz Vakitleri</h1><p>20 Kasım 2026 Cuma</p><p>7 Cemaziyelahir 1448</p>
 <ol>
 <li><span>İmsak</span><span>05:52</span></li>
 <li><span>Güneş</span><span>07:58</span></li>
@@ -34,14 +34,14 @@ VENLO_HTML = """
 <tr><td>Akşam</td><td>16:49</td><td>16:48</td><td>16:46</td></tr>
 <tr><td>Yatsı</td><td>18:38</td><td>18:37</td><td>18:36</td></tr>
 </table>
-<a href="/hollanda">Hollanda: bütün şehirler →</a>
-<a href="https://namaz-vakitleri.fazilettakvimi.com/hollanda/venlo">Venlo</a>
-<a href="/en">English</a><a href="/api/og/tr/hollanda/venlo.jpg">img</a>
+<a href="/country">Country: all cities →</a>
+<a href="https://namaz-vakitleri.fazilettakvimi.com/country/city">Sample City</a>
+<a href="/en">English</a><a href="/api/og/tr/country/city.jpg">img</a>
 </body></html>
 """
 
 # Same page with the table flattened to text and no tags between words.
-VENLO_TEXT = (
+SAMPLE_TEXT = (
     "20 Kasım 2026 Cuma İmsak05:52 Güneş07:58 Öğle12:28 İkindi14:25 Akşam16:48 Yatsı18:37 "
     "Vakit 19 Kasım (Dün) 20 Kasım (Bugün) 21 Kasım (Yarın) | İmsak | 05:50 | 05:52 | 05:53 | "
     "Sabah | 06:10 | 06:12 | 06:13 | Güneş | 07:56 | 07:58 | 07:59 | Öğle | 12:28 | 12:28 | 12:28 | "
@@ -63,15 +63,15 @@ class ParserTests(unittest.TestCase):
         self.assertEqual(page.warnings, [])
 
     def test_html(self):
-        page = fz.parse_page(VENLO_HTML)
+        page = fz.parse_page(SAMPLE_HTML)
         self.check(page)
-        self.assertTrue(page.title.startswith("Venlo"))
+        self.assertTrue(page.title.startswith("Sample City"))
 
     def test_flat_text(self):
-        self.check(fz.parse_page(VENLO_TEXT))
+        self.check(fz.parse_page(SAMPLE_TEXT))
 
     def test_year_rollover(self):
-        text = VENLO_TEXT.replace("20 Kasım 2026", "1 Ocak 2027").replace("19 Kasım", "31 Aralık").replace(
+        text = SAMPLE_TEXT.replace("20 Kasım 2026", "1 Ocak 2027").replace("19 Kasım", "31 Aralık").replace(
             "20 Kasım", "1 Ocak").replace("21 Kasım", "2 Ocak")
         page = fz.parse_page(text)
         self.assertIn(date(2026, 12, 31), page.days)
@@ -82,7 +82,7 @@ class ParserTests(unittest.TestCase):
         self.assertEqual(list(page.days), [date(2026, 11, 20)])
 
     def test_conflict_warns(self):
-        page = fz.parse_page(VENLO_TEXT.replace("İmsak05:52", "İmsak05:55"))
+        page = fz.parse_page(SAMPLE_TEXT.replace("İmsak05:52", "İmsak05:55"))
         self.assertTrue(page.warnings)
 
     def test_bad_order_rejected(self):
@@ -98,8 +98,8 @@ class ParserTests(unittest.TestCase):
                          "aksam": "22:50", "yatsi": "00:35"})
 
     def test_links(self):
-        links = dict(fz.extract_links(VENLO_HTML, "namaz-vakitleri.fazilettakvimi.com"))
-        self.assertEqual(links, {"hollanda": "Hollanda: bütün şehirler →", "hollanda/venlo": "Venlo"})
+        links = dict(fz.extract_links(SAMPLE_HTML, "namaz-vakitleri.fazilettakvimi.com"))
+        self.assertEqual(links, {"country": "Country: all cities →", "country/city": "Sample City"})
 
 
 if __name__ == "__main__":

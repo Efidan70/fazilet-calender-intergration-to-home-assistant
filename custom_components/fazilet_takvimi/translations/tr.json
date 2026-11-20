@@ -18,7 +18,7 @@
       },
       "manual": {
         "title": "Sayfa yolu",
-        "description": "namaz-vakitleri.fazilettakvimi.com üzerindeki yol, örneğin hollanda/venlo",
+        "description": "namaz-vakitleri.fazilettakvimi.com üzerindeki yol, örneğin almanya/koln",
         "data": { "path": "Yol" }
       },
       "confirm": {
