@@ -1,0 +1,37 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Fazilet Takvimi",
+        "menu_options": {
+          "browse": "Land en stad kiezen uit een lijst",
+          "manual": "Pad van de pagina zelf invoeren"
+        }
+      },
+      "browse": {
+        "title": "Land",
+        "data": { "region": "Land (of Turkse provincie)" }
+      },
+      "place": {
+        "title": "Stad",
+        "data": { "place": "Stad / district" }
+      },
+      "manual": {
+        "title": "Pad van de pagina",
+        "description": "Pad op namaz-vakitleri.fazilettakvimi.com, bijvoorbeeld hollanda/venlo",
+        "data": { "path": "Pad" }
+      },
+      "confirm": {
+        "title": "Bijna klaar",
+        "description": "De tijden worden in deze tijdzone getoond. Kies de tijdzone van de stad.",
+        "data": { "name": "Naam", "timezone": "Tijdzone" }
+      }
+    },
+    "error": {
+      "cannot_connect": "Kan Fazilet Takvimi niet bereiken.",
+      "cannot_parse": "Geen gebedstijden gevonden op die pagina. Controleer het pad.",
+      "bad_timezone": "Onbekende tijdzone."
+    },
+    "abort": { "already_configured": "Deze locatie is al ingesteld." }
+  }
+}

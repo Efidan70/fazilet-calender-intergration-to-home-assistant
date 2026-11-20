@@ -1,0 +1,37 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Fazilet Takvimi",
+        "menu_options": {
+          "browse": "Choose country and city from a list",
+          "manual": "Enter the page path manually"
+        }
+      },
+      "browse": {
+        "title": "Country",
+        "data": { "region": "Country (or Turkish province)" }
+      },
+      "place": {
+        "title": "City",
+        "data": { "place": "City / district" }
+      },
+      "manual": {
+        "title": "Page path",
+        "description": "Path on namaz-vakitleri.fazilettakvimi.com, for example hollanda/venlo",
+        "data": { "path": "Path" }
+      },
+      "confirm": {
+        "title": "Almost done",
+        "description": "Times are shown in this time zone. Pick the time zone of the city.",
+        "data": { "name": "Name", "timezone": "Time zone" }
+      }
+    },
+    "error": {
+      "cannot_connect": "Could not reach Fazilet Takvimi.",
+      "cannot_parse": "No prayer times found on that page. Check the path.",
+      "bad_timezone": "Unknown time zone."
+    },
+    "abort": { "already_configured": "This location is already set up." }
+  }
+}

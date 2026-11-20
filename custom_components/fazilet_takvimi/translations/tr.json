@@ -1,0 +1,37 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Fazilet Takvimi",
+        "menu_options": {
+          "browse": "Listeden ülke ve şehir seç",
+          "manual": "Sayfa yolunu elle gir"
+        }
+      },
+      "browse": {
+        "title": "Ülke",
+        "data": { "region": "Ülke (veya Türkiye ili)" }
+      },
+      "place": {
+        "title": "Şehir",
+        "data": { "place": "Şehir / ilçe" }
+      },
+      "manual": {
+        "title": "Sayfa yolu",
+        "description": "namaz-vakitleri.fazilettakvimi.com üzerindeki yol, örneğin hollanda/venlo",
+        "data": { "path": "Yol" }
+      },
+      "confirm": {
+        "title": "Neredeyse bitti",
+        "description": "Vakitler bu saat diliminde gösterilir. Şehrin saat dilimini seçin.",
+        "data": { "name": "Ad", "timezone": "Saat dilimi" }
+      }
+    },
+    "error": {
+      "cannot_connect": "Fazilet Takvimi'ne ulaşılamadı.",
+      "cannot_parse": "Bu sayfada namaz vakti bulunamadı. Yolu kontrol edin.",
+      "bad_timezone": "Bilinmeyen saat dilimi."
+    },
+    "abort": { "already_configured": "Bu konum zaten ekli." }
+  }
+}
