@@ -30,4 +30,4 @@ NEXT_KEYS = ("imsak", "gunes", "ogle", "ikindi", "aksam", "yatsi")
 
 UPDATE_OK = timedelta(hours=6)
 UPDATE_RETRY = timedelta(minutes=30)
-USER_AGENT = "HomeAssistant-FaziletTakvimi/0.2"
+USER_AGENT = "HomeAssistant-FaziletTakvimi/0.1.1"

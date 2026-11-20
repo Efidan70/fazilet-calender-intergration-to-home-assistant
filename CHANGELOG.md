@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.2.0
+## 0.1.1
 - Event entity `Prayer`: fires `prayer_time` and optional `reminder` events, plus a `fazilet_takvimi_event` event on the Home Assistant bus.
 - Blueprint to run your own actions (ezan on a speaker, notification, ...) at prayer time.
 - Options: change time zone and set a reminder (minutes before) after setup.
