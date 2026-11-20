@@ -21,4 +21,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: python3 -I tests/test_parser.py
+      - run: python3 -I tests/test_parser.py && python3 -I tests/test_logic.py

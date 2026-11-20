@@ -10,6 +10,10 @@ BASE_URL = f"https://{BASE_HOST}"
 CONF_PATH = "path"
 CONF_TIMEZONE = "timezone"
 CONF_NAME = "name"
+CONF_REMINDER = "reminder_minutes"
+
+EVENT_NAME = "fazilet_takvimi_event"
+CARD_URL = "/fazilet_takvimi/fazilet-card.js"
 
 PRAYER_KEYS = ("imsak", "sabah", "gunes", "ogle", "ikindi", "aksam", "yatsi")
 PRAYER_NAMES = {
@@ -26,4 +30,4 @@ NEXT_KEYS = ("imsak", "gunes", "ogle", "ikindi", "aksam", "yatsi")
 
 UPDATE_OK = timedelta(hours=6)
 UPDATE_RETRY = timedelta(minutes=30)
-USER_AGENT = "HomeAssistant-FaziletTakvimi/0.1"
+USER_AGENT = "HomeAssistant-FaziletTakvimi/0.2"

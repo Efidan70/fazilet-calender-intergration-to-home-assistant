@@ -16,19 +16,35 @@ Prayer times taken straight from [namaz-vakitleri.fazilettakvimi.com](https://na
 ## What you get
 
 - Timestamp sensors: İmsak, Sabah, Güneş, Öğle, İkindi, Akşam, Yatsı
-- `Next prayer` (name) and `Next prayer time` sensors
+- `Next prayer` (name, with today's times as attributes) and `Next prayer time`
+- `Time until sahur` and `Time until iftar` (minutes, updated every minute). Sahur ends at İmsak and iftar is at Akşam, as in the Fazilet imsakiye.
 - A calendar with today's and tomorrow's prayer times
+- An event entity `Prayer` that fires at every prayer time, and optionally a reminder before it
+- A diagnostic `Last update` sensor, downloadable diagnostics, and a repair notice if updates keep failing
+- A Lovelace card
 
-Example automation (Akşam). The entity ID depends on the name you chose during setup, so check it under Settings → Entities:
+### Play the ezan or send a notification
+
+Import the blueprint, then choose the prayers and the actions to run (media player, notification, lights, ...):
+
+[![Import the blueprint.](https://my.home-assistant.io/badges/blueprint_import.svg)](https://my.home-assistant.io/redirect/blueprint_import/?blueprint_url=https%3A%2F%2Fgithub.com%2FEfidan70%2Ffazilet-calender-intergration-to-home-assistant%2Fblob%2Fmain%2Fblueprints%2Fautomation%2Ffazilet_takvimi%2Fprayer_actions.yaml)
+
+To get a reminder before each prayer, open the integration → Configure and set the minutes. Then choose *Reminder* in the blueprint.
+
+You can also write your own automation on the bus event `fazilet_takvimi_event`. Its data contains `kind` (`prayer_time` or `reminder`), `prayer` (`imsak`, `sabah`, `gunes`, `ogle`, `ikindi`, `aksam`, `yatsi`), `prayer_name`, `time`, `title` and `path`.
+
+### Lovelace card
+
+The card is served by the integration, so no extra resource is needed (reload the browser after the first install):
 
 ```yaml
-trigger:
-  - platform: time
-    at: sensor.<your_city>_aksam
-action:
-  - service: notify.notify
-    data: { message: "Akşam time has started" }
+type: custom:fazilet-card
+entity: sensor.<your_city>_next_prayer
+show_sabah: false   # optional
+title: My city      # optional
 ```
+
+Check the entity ID under Settings → Entities, it depends on the name you chose during setup.
 
 ## Why the times are correct
 
@@ -40,7 +56,7 @@ action:
 ## Limitations
 
 - Fazilet has no official API. If the website changes, the parser may need an update.
-- Religious days (kandil etc.) are not included yet.
+- Religious days (kandil, bayram) and Hijri dates are not included yet.
 
 ## Tests
 

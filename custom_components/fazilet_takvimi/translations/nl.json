@@ -10,21 +10,30 @@
       },
       "browse": {
         "title": "Land",
-        "data": { "region": "Land (of Turkse provincie)" }
+        "data": {
+          "region": "Land (of Turkse provincie)"
+        }
       },
       "place": {
         "title": "Stad",
-        "data": { "place": "Stad / district" }
+        "data": {
+          "place": "Stad / district"
+        }
       },
       "manual": {
         "title": "Pad van de pagina",
         "description": "Pad op namaz-vakitleri.fazilettakvimi.com, bijvoorbeeld almanya/koln",
-        "data": { "path": "Pad" }
+        "data": {
+          "path": "Pad"
+        }
       },
       "confirm": {
         "title": "Bijna klaar",
         "description": "De tijden worden in deze tijdzone getoond. Kies de tijdzone van de stad.",
-        "data": { "name": "Naam", "timezone": "Tijdzone" }
+        "data": {
+          "name": "Naam",
+          "timezone": "Tijdzone"
+        }
       }
     },
     "error": {
@@ -32,6 +41,29 @@
       "cannot_parse": "Geen gebedstijden gevonden op die pagina. Controleer het pad.",
       "bad_timezone": "Onbekende tijdzone."
     },
-    "abort": { "already_configured": "Deze locatie is al ingesteld." }
+    "abort": {
+      "already_configured": "Deze locatie is al ingesteld."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Fazilet Takvimi opties",
+        "description": "De herinnering stuurt een `reminder`-event zoveel minuten vóór elke vakit (0 = uit).",
+        "data": {
+          "timezone": "Tijdzone",
+          "reminder_minutes": "Herinnering (minuten ervoor)"
+        }
+      }
+    },
+    "error": {
+      "bad_timezone": "Onbekende tijdzone."
+    }
+  },
+  "issues": {
+    "update_failing": {
+      "title": "Fazilet Takvimi kan {name} niet verversen",
+      "description": "De gebedstijden voor {name} konden al enkele uren niet worden ververst. De laatst bekende tijden worden nog getoond. Controleer of {url} opent en gebedstijden toont. Als de opmaak van de website is veranderd, heeft de integratie een update nodig."
+    }
   }
 }

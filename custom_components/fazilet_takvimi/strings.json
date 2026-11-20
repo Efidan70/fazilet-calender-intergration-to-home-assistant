@@ -10,21 +10,30 @@
       },
       "browse": {
         "title": "Country",
-        "data": { "region": "Country (or Turkish province)" }
+        "data": {
+          "region": "Country (or Turkish province)"
+        }
       },
       "place": {
         "title": "City",
-        "data": { "place": "City / district" }
+        "data": {
+          "place": "City / district"
+        }
       },
       "manual": {
         "title": "Page path",
         "description": "Path on namaz-vakitleri.fazilettakvimi.com, for example almanya/koln",
-        "data": { "path": "Path" }
+        "data": {
+          "path": "Path"
+        }
       },
       "confirm": {
         "title": "Almost done",
         "description": "Times are shown in this time zone. Pick the time zone of the city.",
-        "data": { "name": "Name", "timezone": "Time zone" }
+        "data": {
+          "name": "Name",
+          "timezone": "Time zone"
+        }
       }
     },
     "error": {
@@ -32,6 +41,29 @@
       "cannot_parse": "No prayer times found on that page. Check the path.",
       "bad_timezone": "Unknown time zone."
     },
-    "abort": { "already_configured": "This location is already set up." }
+    "abort": {
+      "already_configured": "This location is already set up."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Fazilet Takvimi options",
+        "description": "Reminder fires a `reminder` event this many minutes before each prayer (0 = off).",
+        "data": {
+          "timezone": "Time zone",
+          "reminder_minutes": "Reminder (minutes before)"
+        }
+      }
+    },
+    "error": {
+      "bad_timezone": "Unknown time zone."
+    }
+  },
+  "issues": {
+    "update_failing": {
+      "title": "Fazilet Takvimi cannot update {name}",
+      "description": "Prayer times for {name} could not be refreshed for several hours. The last known times are still shown. Check that {url} opens and shows prayer times. If the website layout changed, the integration needs an update."
+    }
   }
 }

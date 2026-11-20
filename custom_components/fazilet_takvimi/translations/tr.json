@@ -10,21 +10,30 @@
       },
       "browse": {
         "title": "Ülke",
-        "data": { "region": "Ülke (veya Türkiye ili)" }
+        "data": {
+          "region": "Ülke (veya Türkiye ili)"
+        }
       },
       "place": {
         "title": "Şehir",
-        "data": { "place": "Şehir / ilçe" }
+        "data": {
+          "place": "Şehir / ilçe"
+        }
       },
       "manual": {
         "title": "Sayfa yolu",
         "description": "namaz-vakitleri.fazilettakvimi.com üzerindeki yol, örneğin almanya/koln",
-        "data": { "path": "Yol" }
+        "data": {
+          "path": "Yol"
+        }
       },
       "confirm": {
         "title": "Neredeyse bitti",
         "description": "Vakitler bu saat diliminde gösterilir. Şehrin saat dilimini seçin.",
-        "data": { "name": "Ad", "timezone": "Saat dilimi" }
+        "data": {
+          "name": "Ad",
+          "timezone": "Saat dilimi"
+        }
       }
     },
     "error": {
@@ -32,6 +41,29 @@
       "cannot_parse": "Bu sayfada namaz vakti bulunamadı. Yolu kontrol edin.",
       "bad_timezone": "Bilinmeyen saat dilimi."
     },
-    "abort": { "already_configured": "Bu konum zaten ekli." }
+    "abort": {
+      "already_configured": "Bu konum zaten ekli."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Fazilet Takvimi seçenekleri",
+        "description": "Hatırlatma, her vaketten bu kadar dakika önce bir `reminder` olayı gönderir (0 = kapalı).",
+        "data": {
+          "timezone": "Saat dilimi",
+          "reminder_minutes": "Hatırlatma (dakika önce)"
+        }
+      }
+    },
+    "error": {
+      "bad_timezone": "Bilinmeyen saat dilimi."
+    }
+  },
+  "issues": {
+    "update_failing": {
+      "title": "Fazilet Takvimi {name} için güncelleyemiyor",
+      "description": "{name} için namaz vakitleri saatlerdir yenilenemiyor. Son bilinen vakitler gösteriliyor. {url} adresinin açıldığını ve vakitleri gösterdiğini kontrol edin. Site düzeni değiştiyse entegrasyonun güncellenmesi gerekir."
+    }
   }
 }

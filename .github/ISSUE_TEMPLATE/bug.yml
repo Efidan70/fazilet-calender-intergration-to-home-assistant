@@ -1,0 +1,21 @@
+name: Wrong or missing prayer times
+description: Times differ from the Fazilet Takvimi, or the integration fails
+labels: [bug]
+body:
+  - type: input
+    id: path
+    attributes:
+      label: City path
+      description: For example almanya/koln
+    validations: { required: true }
+  - type: textarea
+    id: expected
+    attributes:
+      label: Times in the Fazilet app/website vs. in Home Assistant
+      description: Date, city, and the times that differ.
+    validations: { required: true }
+  - type: textarea
+    id: diag
+    attributes:
+      label: Diagnostics
+      description: Download diagnostics from the integration page and paste the relevant part, or the log lines mentioning fazilet_takvimi.

@@ -1,0 +1,72 @@
+blueprint:
+  name: Fazilet Takvimi - run actions at prayer time
+  description: >
+    Runs your own actions (play the ezan on a speaker, send a notification,
+    dim lights, ...) at the chosen prayer times, or a number of minutes before
+    (set the reminder in the integration options first).
+  domain: automation
+  input:
+    prayers:
+      name: Prayers
+      description: Which prayers should trigger the actions.
+      default: [imsak, gunes, ogle, ikindi, aksam, yatsi]
+      selector:
+        select:
+          multiple: true
+          options:
+            - { label: İmsak, value: imsak }
+            - { label: Sabah, value: sabah }
+            - { label: Güneş, value: gunes }
+            - { label: Öğle, value: ogle }
+            - { label: İkindi, value: ikindi }
+            - { label: Akşam, value: aksam }
+            - { label: Yatsı, value: yatsi }
+    kind:
+      name: When
+      description: At the prayer time itself, or at the reminder before it.
+      default: prayer_time
+      selector:
+        select:
+          options:
+            - { label: At prayer time, value: prayer_time }
+            - { label: Reminder (minutes before), value: reminder }
+    city_path:
+      name: City path (optional)
+      description: Only for people with several cities, e.g. almanya/koln. Leave empty for all.
+      default: ""
+      selector:
+        text:
+    actions:
+      name: Actions
+      description: What to do. Available variables are `prayer`, `prayer_name`, `time` and `city`.
+      default: []
+      selector:
+        action:
+
+mode: queued
+max_exceeded: silent
+
+variables:
+  prayers: !input prayers
+  kind: !input kind
+  city_path: !input city_path
+
+trigger:
+  - platform: event
+    event_type: fazilet_takvimi_event
+
+condition:
+  - condition: template
+    value_template: >
+      {{ trigger.event.data.kind == kind
+         and trigger.event.data.prayer in prayers
+         and (city_path == '' or trigger.event.data.path == city_path) }}
+
+action:
+  - variables:
+      prayer: "{{ trigger.event.data.prayer }}"
+      prayer_name: "{{ trigger.event.data.prayer_name }}"
+      time: "{{ trigger.event.data.time }}"
+      city: "{{ trigger.event.data.title }}"
+  - choose: []
+    default: !input actions

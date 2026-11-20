@@ -8,9 +8,13 @@ from typing import Any
 
 import aiohttp
 import voluptuous as vol
-from homeassistant.config_entries import ConfigFlow, ConfigFlowResult
+from homeassistant.config_entries import ConfigEntry, ConfigFlow, ConfigFlowResult, OptionsFlow
+from homeassistant.core import callback
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from homeassistant.helpers.selector import (
+    NumberSelector,
+    NumberSelectorConfig,
+    NumberSelectorMode,
     SelectOptionDict,
     SelectSelector,
     SelectSelectorConfig,
@@ -23,6 +27,7 @@ from .const import (
     BASE_URL,
     CONF_NAME,
     CONF_PATH,
+    CONF_REMINDER,
     CONF_TIMEZONE,
     DOMAIN,
     USER_AGENT,
@@ -49,6 +54,11 @@ class FaziletConfigFlow(ConfigFlow, domain=DOMAIN):
     """Handle a config flow."""
 
     VERSION = 1
+
+    @staticmethod
+    @callback
+    def async_get_options_flow(config_entry: ConfigEntry) -> OptionsFlow:
+        return FaziletOptionsFlow()
 
     def __init__(self) -> None:
         self._region: str | None = None
@@ -158,3 +168,30 @@ class FaziletConfigFlow(ConfigFlow, domain=DOMAIN):
             }
         )
         return self.async_show_form(step_id="confirm", data_schema=schema, errors=errors)
+
+
+class FaziletOptionsFlow(OptionsFlow):
+    """Change time zone and reminder after setup."""
+
+    async def async_step_init(self, user_input: dict[str, Any] | None = None) -> ConfigFlowResult:
+        errors: dict[str, str] = {}
+        current = {**self.config_entry.data, **self.config_entry.options}
+        if user_input is not None:
+            if dt_util.get_time_zone(user_input[CONF_TIMEZONE]) is None:
+                errors[CONF_TIMEZONE] = "bad_timezone"
+            else:
+                user_input[CONF_REMINDER] = int(user_input[CONF_REMINDER])
+                return self.async_create_entry(data=user_input)
+        zones = sorted(await self.hass.async_add_executor_job(zoneinfo.available_timezones))
+        schema = vol.Schema(
+            {
+                vol.Required(
+                    CONF_TIMEZONE, default=current.get(CONF_TIMEZONE) or self.hass.config.time_zone
+                ): SelectSelector(SelectSelectorConfig(options=zones, mode=SelectSelectorMode.DROPDOWN)),
+                vol.Required(CONF_REMINDER, default=int(current.get(CONF_REMINDER, 0) or 0)): NumberSelector(
+                    NumberSelectorConfig(min=0, max=120, step=1, unit_of_measurement="min",
+                                         mode=NumberSelectorMode.BOX)
+                ),
+            }
+        )
+        return self.async_show_form(step_id="init", data_schema=schema, errors=errors)
